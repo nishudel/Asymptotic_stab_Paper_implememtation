@@ -63,13 +63,12 @@ ke4= (Mt/2)*((pcm_x4d)'*(pcm_x4d)+ (pcm_y4d)'*(pcm_y4d));
 K=ke1+ke2+ke3+ke4;
 
 %potential energy
-V=(m*pcm_y1+m*pcm_y2+Mh*pcm_y3+Mt*pcm_y4)*g;
+V=(m*pcm_y1+m*pcm_y2+m*pcm_y3+m*pcm_y4);
 
 %D,G,C matrices
 D = jacobian(jacobian(K,qd),qd);
-D=simplify(D)
-G = jacobian(V,q);
-G=simplify(G)
+G = jacobian(V,q)
+
 for k=1:3
 	for j=1:3
 		C(k,j)=0*g;
