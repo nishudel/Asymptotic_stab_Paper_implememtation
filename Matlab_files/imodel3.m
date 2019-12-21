@@ -19,8 +19,9 @@ syms  m Mh Mt real
 syms g r l real
 
 % we are calculating the kintetic energy to find the D matrix
-
-
+%qs to indicate the states usd in the swing phase
+qs=[q1;q2;q3];
+qsd=[q1d;q2d;q3d];
 q=[q1;q2;q3;q4;q5];
 qd=[q1d;q2d;q3d;q4d;q5d];
 
@@ -71,10 +72,42 @@ K=ke1+ke2+ke3+ke4;
 
 %D matrix- the only matrix that matters for the impact model
 D = jacobian(jacobian(K,qd),qd);
-D=simplify(D)
+D=simplify(D);
 
-%Now, we calculate the E2 matrix - jacobian(p2,qe)..symbols as used in the
-%book
+%Now, we calculate the E2 matrix -jacobian(p2,qe)
+% let p2 be the position of the swing leg which is about to impact
 
+p2_x=q4+r*sin(q1)-r*sin(q2);
+p2_y=q5+r*cos(q1)-r*cos(q2);
+
+p2=[p2_x;p2_y];
+
+E2=jacobian(p2,q);
+
+%now we ifnd the new initial conditions ie the angles and the velocities
+%we CAN also find the impulse that acts when impact occurs
+
+% Assume that we now know the values of the states just before the impact
+
+R=[0 1 0;1 0 0;0 0 1];
+
+%new values of the angles
+q_n= R*qs;
+
+%findin new values of velocity and the impulse
+%deltaF2  (to calculate the impulse on the swing leg)
+%Formula 3.23 and 3.24 on the book
+Ye_bel=[q4;q5];
+jac_Ye=jacobian(Ye_bel,qs);
+Ye_abv=eye(3);
+Ye=[Ye_abv;jac_Ye];
+%size(Ye)
+delF2= -inv(E2*inv(D)*E2')*E2*Ye;
+%delF2=simplify(delF2)
+%size(delF2)
+%delta qe dot
+delqd= inv(D)*E2'*delF2+Ye;
+delqd=simplify(delqd)
+size(delqd)
 
 
