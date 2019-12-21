@@ -95,8 +95,10 @@ R=[0 1 0;1 0 0;0 0 1];
 q_n= R*qs;
 
 %findin new values of velocity and the impulse
+
 %deltaF2  (to calculate the impulse on the swing leg)
 %Formula 3.23 and 3.24 on the book
+
 Ye_bel=[q4;q5];
 jac_Ye=jacobian(Ye_bel,qs);
 Ye_abv=eye(3);
@@ -106,8 +108,23 @@ delF2= -inv(E2*inv(D)*E2')*E2*Ye;
 %delF2=simplify(delF2)
 %size(delF2)
 %delta qe dot
-delqd= inv(D)*E2'*delF2+Ye;
-delqd=simplify(delqd)
-size(delqd)
+delqed= inv(D)*E2'*delF2+Ye;
+%size(delqed)
+%delqd=simplify(delqd);
+
+%formula 3.28 on the book
+
+%delqs dot of qs-
+
+multip=[0 1 0 0 0; 1 0 0 0 0 ;0 0 1 0 0];
+delqsd=multip*delqed;
+
+%new velocity
+qd_n=delqsd*qsd;
+
+% new initial condition
+q_new=[q_n;qd_n];
+q_new=simplify(q_new)
+
 
 
