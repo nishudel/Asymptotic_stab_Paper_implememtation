@@ -11,6 +11,8 @@ syms  m Mh Mt real
 % of torso link
 syms g r l real
 
+
+
 % we are calculating the kintetic energy and potential enerdy to find the
 % lagrangian equation 
 
