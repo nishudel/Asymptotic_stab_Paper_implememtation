@@ -75,7 +75,7 @@ G=simplify(G)
 for k=1:3
 	for j=1:3
 		C(k,j)=0*g;
-		for i=1:2
+		for i=1:3
 			C(k,j)=C(k,j)+1/2*(diff(D(k,j),q(i)) + ...
 				diff(D(k,i),q(j)) - ...
 				diff(D(i,j),q(k)))*qd(i);

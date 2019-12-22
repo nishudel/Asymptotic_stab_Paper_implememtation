@@ -23,7 +23,7 @@ E2 =[  cos(x(1)), -cos(x(2)), 0, 1, 0;
 delF2= -inv(E2*inv(De)*E2')*E2*Ye;
 
 delqed= (inv(De)*E2'*delF2)+Ye;
-
+%size(del
 delqsd=[delqed(2,:);delqed(1,:);delqed(3,:)]
 
 qd_n=delqsd*qsd;

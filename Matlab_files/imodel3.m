@@ -19,12 +19,12 @@ syms  m Mh Mt real
 syms g r l real
 
 %all weights are in kg all lengths are in m
-m=5;
-l=0.5;
-r=1.0;
-Mt=10;
-Mh=15;
-g=9.81;%m/s2
+% m=5;
+% l=0.5;
+% r=1.0;
+% Mt=10;
+% Mh=15;
+% g=9.81;%m/s2
 % we are calculating the kintetic energy to find the D matrix
 %qs to indicate the states usd in the swing phase
 qs=[q1;q2;q3];
